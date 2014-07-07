@@ -21,7 +21,19 @@
     NSLog(@"setPlayingCardView");
     _playingCardView = playingCardView;
     //[self drawRandomPlayingCard];
-    //[playingCardView addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:playingCardView action:@selector(pinch:)]];
+    [playingCardView addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:playingCardView action:@selector(pinch:)]];
+}
+- (IBAction)swipe:(UISwipeGestureRecognizer *)sender {
+    [UIView transitionWithView:self.playingCardView
+                      duration:0.5
+                       options:UIViewAnimationOptionTransitionFlipFromLeft
+                    animations:^{
+                        if (!self.playingCardView.faceUp){
+                            //[self drawRandomPlayingCard];
+                        }
+                        self.playingCardView.faceUp = !self.playingCardView.faceUp;
+                    }
+                    completion:NULL];
 }
 - (void)viewDidLoad
 {
@@ -29,7 +41,7 @@
 	// Do any additional setup after loading the view, typically from a nib.
     self.playingCardView.rank=10;
     self.playingCardView.suit=@"♥";
-    self.playingCardView.faceUp=YES;
+    self.playingCardView.faceUp=NO;
 }
 
 - (void)didReceiveMemoryWarning

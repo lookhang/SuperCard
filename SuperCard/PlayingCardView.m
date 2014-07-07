@@ -72,7 +72,7 @@
     
     if (self.faceUp) {
         UIImage *faceImage=[UIImage imageNamed:[NSString stringWithFormat:@"%@%@",[self rankAsString],self.suit]];
-        NSLog(@"%@",[NSString stringWithFormat:@"%@%@",[self rankAsString],self.suit]);
+        //NSLog(@"%@",[NSString stringWithFormat:@"%@%@",[self rankAsString],self.suit]);
         
         if (faceImage) {
             CGRect imageRect=CGRectInset(self.bounds, self.bounds.size.width*(1.0-self.faceCardScaleFactor), self.bounds.size.height *(1.0-self.faceCardScaleFactor));
@@ -124,6 +124,17 @@
 - (void)popContext
 {
     CGContextRestoreGState(UIGraphicsGetCurrentContext());
+}
+
+#pragma mark - Gesture Handlers
+
+- (void)pinch:(UIPinchGestureRecognizer *)gesture
+{
+    if ((gesture.state == UIGestureRecognizerStateChanged) ||
+        (gesture.state == UIGestureRecognizerStateEnded)) {
+        self.faceCardScaleFactor *= gesture.scale;
+        gesture.scale = 1;
+    }
 }
 
 
