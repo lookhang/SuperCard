@@ -16,12 +16,20 @@
 
 @implementation ViewController
 
+- (void)setPlayingCardView:(PlayingCardView *)playingCardView
+{
+    NSLog(@"setPlayingCardView");
+    _playingCardView = playingCardView;
+    //[self drawRandomPlayingCard];
+    //[playingCardView addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:playingCardView action:@selector(pinch:)]];
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    self.playingCardView.rank=13;
-    self.playingCardView.suit=@"♥︎";
+    self.playingCardView.rank=10;
+    self.playingCardView.suit=@"♥";
+    self.playingCardView.faceUp=YES;
 }
 
 - (void)didReceiveMemoryWarning
